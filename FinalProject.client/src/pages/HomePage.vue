@@ -1,8 +1,15 @@
 <template>
-  <div class="col-3" v-for="k in keeps" :key="k.id">
-    <KeepCard :keep="k" />
+  <section class="container-fluid">
+    <div class="row">
 
-  </div>
+
+      <div class="my-2" v-for="k in keeps" :key="k.id">
+        <KeepCard :keep="k" />
+
+
+      </div>
+    </div>
+  </section>
 </template>
 
 
@@ -34,4 +41,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.keep {
+  height: 200px;
+}
 </style>

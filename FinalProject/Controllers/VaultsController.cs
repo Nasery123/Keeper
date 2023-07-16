@@ -6,11 +6,13 @@ public class VaultsController : ControllerBase
 {
     private readonly VaultsService _vaultsService;
     private readonly Auth0Provider _auth;
+    private readonly VaultKeepService _vkService;
 
-    public VaultsController(VaultsService vaultsService, Auth0Provider auth)
+    public VaultsController(VaultsService vaultsService, Auth0Provider auth, VaultKeepService vkService)
     {
         _vaultsService = vaultsService;
         _auth = auth;
+        _vkService = vkService;
     }
 
     [HttpPost]
@@ -77,4 +79,21 @@ public class VaultsController : ControllerBase
             return BadRequest(e.Message);
         }
     }
+
+    // [HttpGet("{vaultId}/keeps")]
+
+    // public ActionResult<List<VaultKeep>> GetKeepsByVaultId(int vaultId)
+    // {
+    //     try
+    //     {
+    //         List<Keep> keeps = GetkeepsByVaultId(vaultId);
+    //         return Ok(keeps);
+    //     }
+    //     catch (Exception e)
+    //     {
+    //         return BadRequest(e.Message);
+    //     }
+
+    // }
+
 }

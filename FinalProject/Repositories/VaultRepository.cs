@@ -81,4 +81,15 @@ public class VaultRepository
         _db.Execute(sql, original);
 
     }
+    // internal List<Keep> GetKeepsByVaultId(int vaultId)
+    // {
+    //     string sql = @"
+    //     SELECT * FROM vaultkeep vk
+    //     JOIN accounts a ON vk.creatorId = a.id
+    //     JOIN vaults v ON vk.vaultId = v.id
+    //     WHERE k.vaultId = @vaultId
+
+    //     ;";
+
+    // }
 }

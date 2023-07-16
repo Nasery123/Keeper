@@ -14,6 +14,11 @@ public class VaultsService
         return vault;
     }
 
+    // internal List<Keep> GetkeepsByVaultId(int vaultId)
+    // {
+    //     return _repo.GetKeepsByVaultId(vaultId);
+    // }
+
     internal Vault GetVaultById(int vaultId)
     {
         Vault vault = _repo.GetVaultById(vaultId);
