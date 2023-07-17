@@ -16,9 +16,24 @@ public class VaultKeepService
 
     }
 
-    // internal List<Keep> GetkeepsByVaultId(int vaultId)
-    // {
-    //     List<Keep> keeps = _vtrepo.GetKeepsByvaultId(vaultId);
-    //     return keeps;
-    // }
+    internal VaultKeep GetVaultKeepById(int vaultkeepId)
+    {
+        VaultKeep vaultKeep = _vtrepo.GetVaultKeepById(vaultkeepId);
+        return vaultKeep;
+    }
+
+    internal string DeleteVaultKeep(int vaultkeepId)
+    {
+        VaultKeep vaultKeep = GetVaultKeepById(vaultkeepId);
+        int rows = _vtrepo.DeleteVaultKeep(vaultkeepId);
+        if (rows > 1) throw new Exception(" please do not delete more than one row");
+        return "you deleted the vaultkeep.";
+
+    }
+
+    internal List<KeepsInVault> GetKeepsByVaultId(int vaultId)
+    {
+        List<KeepsInVault> keeps = _vtrepo.GetKeepsByVaultId(vaultId);
+        return keeps;
+    }
 }

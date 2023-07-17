@@ -31,22 +31,22 @@ public class AccountController : ControllerBase
     }
 
 
-    [HttpGet]
-    [Authorize]
-    public async Task<ActionResult<Vault>> GetMyVault()
-    {
-        try
-        {
-            Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
-            List<Vault> myVault = _vaultService.GetMyVault(userInfo.Id);
-            return Ok(myVault);
+    // [HttpGet]
+    // [Authorize]
+    // public async Task<ActionResult<Vault>> GetMyVault()
+    // {
+    //     try
+    //     {
+    //         Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
+    //         List<Vault> myVault = _vaultService.GetMyVault(userInfo.Id);
+    //         return Ok(myVault);
 
-        }
-        catch (Exception e)
-        {
-            return BadRequest(e.Message);
-        }
-    }
+    //     }
+    //     catch (Exception e)
+    //     {
+    //         return BadRequest(e.Message);
+    //     }
+    // }
 
 
 

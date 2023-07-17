@@ -15,5 +15,21 @@ class KeepsService {
         logger.log('here is your active keep', res.data)
         AppState.activeKeep = new Keep(res.data)
     }
+    async createKeep(formData) {
+        const res = await api.post('api/keeps', formData)
+        logger.log('here is your new keep', res.data)
+
+    }
+    async editKeep(formData) {
+        let activeKeep = AppState.activeKeep
+        activeKeep = await api.put(`api/keeps/${activeKeep.id}`, formData)
+        AppState.activeKeep = new Keep(activeKeep)
+    }
+
+    async deleteKeep(keepId) {
+        const res = await api.delete(`api/keeps/${keepId}`)
+        logger.log(`you deleted the keep at id ${keepId}`)
+        // AppState.keeps = AppState.keeps.filter(k k.id != keepId)
+    }
 }
 export const keepsService = new KeepsService();

@@ -32,9 +32,9 @@ public class VaultRepository
 
     }
 
-    internal List<Vault> GetMyVault(string creatorId)
-    {
-    }
+    // internal List<Vault> GetMyVault(string creatorId)
+    // {
+    // }
 
     internal List<Vault> GetUsersVault(string profileId)
     {

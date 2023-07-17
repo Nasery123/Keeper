@@ -12,6 +12,7 @@
             <div>
                 <img class="keep col-md-4 col-12" @click="sectActiveKeep(keep.id)" :src="keep.img" alt="">
             </div>
+            <p><i class="mdi mdi-delete text-danger btn" @click="deleteKeep(keep.id)"></i></p>
             <!-- {{ keep }} -->
             <!-- </div>
         </div> -->
@@ -33,12 +34,24 @@ export default {
     props: {
         keep: { type: Keep, required: true }
     },
-    setup() {
+    setup(props) {
         return {
             async sectActiveKeep(keepId) {
                 try {
                     Modal.getOrCreateInstance('#keepDetails').show()
                     await keepsService.setActiveKeep(keepId)
+                } catch (error) {
+                    Pop.error(error)
+                    logger.log(error)
+                }
+            },
+            async deleteKeep(keepId) {
+                try {
+                    const yes = await Pop.confirm("do you want to delete this keep")
+                    if (!yes) {
+                        return
+                    }
+                    await keepsService.deleteKeep(keepId)
                 } catch (error) {
                     Pop.error(error)
                     logger.log(error)

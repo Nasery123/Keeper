@@ -3,6 +3,9 @@
     <Navbar />
   </header>
   <main>
+
+
+
     <router-view />
   </main>
   <!-- <footer class="bg-dark text-light">
@@ -11,6 +14,18 @@
 
   <Modal id="keepDetails">
     <KeepDetails />
+  </Modal>
+
+  <Modal id="createKeep">
+    <CreateKeepCard />
+  </Modal>
+
+  <Modal id="editKeep">
+    <EditKeepForm />
+  </Modal>
+
+  <Modal id="createVault">
+    <CreateVaultForm />
   </Modal>
 </template>
 

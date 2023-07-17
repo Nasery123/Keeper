@@ -1,4 +1,11 @@
 <template>
+  <div class="row">
+    <div class="col-md-4 col-8 d-flex justify-content-between">
+      <button class="btn btn-primary m-1" data-bs-toggle="modal" data-bs-target="#createKeep">CREATE
+        KEEP</button>
+      <button class="btn btn-primary m-1" data-bs-toggle="modal" data-bs-target="#createVault">CREATE VAULT</button>
+    </div>
+  </div>
   <section class="container-fluid">
     <div class="row">
 

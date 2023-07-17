@@ -12,4 +12,10 @@ namespace FinalProject.Models
         public Account Creator { get; set; }
 
     }
+
+    public class KeepsInVault : Keep
+    {
+        public int VaultId { get; set; }
+        public int VaultKeepId { get; set; }
+    }
 }

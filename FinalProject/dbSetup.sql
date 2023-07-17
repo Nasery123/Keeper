@@ -11,6 +11,10 @@ CREATE TABLE
         coverImg VARCHAR(255) COMMENT 'User CoverImage'
     ) default charset utf8 COMMENT '';
 
+ALTER TABLE accounts ADD COLUMN coverImg VARCHAR(255) DEFAULT '';
+
+ALTER TABLE accounts DROP COLUMN coverImg;
+
 CREATE TABLE
     vaults(
         id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
