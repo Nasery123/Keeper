@@ -27,6 +27,12 @@ public class KeepsService
         return keep;
     }
 
+    internal List<Keep> GetUsersKeep(string profileId)
+    {
+        List<Keep> usersKeep = _repo.GetUsersKeep(profileId);
+        return usersKeep;
+    }
+
     internal string RemoveKeep(int keepId)
     {
         GetKeepById(keepId);

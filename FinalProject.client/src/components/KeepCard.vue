@@ -37,7 +37,7 @@ export default {
         return {
             async sectActiveKeep(keepId) {
                 try {
-                    // Modal.getOrCreateInstance('#keepDetails').show()
+                    Modal.getOrCreateInstance('#keepDetails').show()
                     await keepsService.setActiveKeep(keepId)
                 } catch (error) {
                     Pop.error(error)

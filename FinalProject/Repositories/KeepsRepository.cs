@@ -68,6 +68,25 @@ public class KeepsRepository
         return keep;
     }
 
+    internal List<Keep> GetUsersKeep(string profileId)
+    {
+        string sql = @"
+        SELECT *
+        FROM keep
+        JOIN accounts ON keep.CreatorId = @profileId
+
+
+        ;";
+        List<Keep> keep = _db.Query<Keep, Account, Keep>(sql, (keep, account) =>
+        {
+            keep.Creator = account;
+            return keep;
+        }, new { profileId }).ToList();
+        return keep;
+
+
+    }
+
     internal int RemoveKeep(int keepId)
     {
         string sql = @"
