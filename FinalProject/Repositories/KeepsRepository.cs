@@ -111,4 +111,19 @@ public class KeepsRepository
 
         _db.Execute(sql, original);
     }
+
+    internal void UpdateView(Keep keep)
+    {
+        string sql = @"
+    UPDATE keep
+    SET
+    views = @Views
+    WHERE id = @Id
+
+
+
+    ;";
+        _db.Execute(sql, keep);
+    }
+
 }

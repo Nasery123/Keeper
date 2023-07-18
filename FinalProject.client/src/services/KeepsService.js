@@ -13,6 +13,8 @@ class KeepsService {
     async setActiveKeep(keepId) {
         const res = await api.get('api/keeps/' + keepId)
         logger.log('here is your active keep', res.data)
+        // let view = document.getElementById('views').textContent;
+        // view++;
         AppState.activeKeep = new Keep(res.data)
     }
     async createKeep(formData) {

@@ -24,6 +24,8 @@ public class KeepsService
     internal Keep GetKeepById(int keepId)
     {
         Keep keep = _repo.GetKeepById(keepId);
+        keep.views++;
+        _repo.UpdateView(keep);
         return keep;
     }
 

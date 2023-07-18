@@ -6,6 +6,7 @@
 
 
 
+
     <router-view />
   </main>
   <!-- <footer class="bg-dark text-light">
@@ -26,6 +27,10 @@
 
   <Modal id="createVault">
     <CreateVaultForm />
+  </Modal>
+
+  <Modal id="editAccount">
+    <EditAccountForm />
   </Modal>
 </template>
 
