@@ -6,9 +6,9 @@
   </div>
 
 
-  <section class="container-fluid">
+  <section class="container-fluid" v-if="myVault">
     <div class="row">
-      {{ vaults }}
+      {{ Vaults }}
     </div>
 
   </section>
@@ -35,7 +35,8 @@ export default {
     })
     return {
       account: computed(() => AppState.account),
-      vaults: computed(() => AppState.vaults)
+      vaults: computed(() => AppState.vaults),
+      myVault: computed(() => AppState.myVault)
     }
   }
 }
