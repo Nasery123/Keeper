@@ -25,8 +25,11 @@
                             <p><b>{{ activeKeep.name }}</b></p>
                             {{ activeKeep.description }}
                             <!-- {{ active.category }} -->
+
                             {{ activeKeep.creator.name }}
-                            <img class="rounded" :src="activeKeep.creator.picture" alt="">
+                            <routerlink :to="{ name: 'Profile', params: { profileId: activeKeep?.CreatorId } }">
+                                <img class="rounded" :src="activeKeep.creator.picture" alt="">
+                            </routerlink>
                         </div>
                         <!-- <p>INGREDIENTS</p>
                 <div class="col-3" v-for="i in ingredients" :key="i.id">

@@ -12,9 +12,9 @@ class VaultsService {
         // AppState.vaults = res.data.map(v => new Vault(v))
     }
     async getVault() {
-        const res = await api.get('api/vaults')
-        logger.log('here are some keeps', res.data)
-        AppState.vaults = res.data.map(v => new Vault(v))
+        const res = await api.get('account/vaults')
+        logger.log('here are some vaults in your account page', res.data)
+        AppState.myVault = res.data.map(v => new Vault(v))
     }
 
 }
