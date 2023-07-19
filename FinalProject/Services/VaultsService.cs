@@ -34,23 +34,40 @@ public class VaultsService
 
 
 
-    internal Vault GetVaultById(int vaultId)
+    internal Vault GetVaultById(int vaultId, string userId)
     {
+
         Vault vault = _repo.GetVaultById(vaultId);
+        if (vault == null)
+        {
+            throw new Exception("that vault is not exist");
+        }
+        if (vault.IsPrivate == true && userId != vault.CreatorId)
+        {
+            throw new Exception("this vault is not open to public");
+        }
         return vault;
     }
 
-    internal string RemoveVault(int vaultId)
+    internal string RemoveVault(int vaultId, string userId)
     {
-        Vault vault = GetVaultById(vaultId);
-        int rows = _repo.RemoveVault(vaultId);
-        if (rows > 1) throw new Exception("make sure not to delet more than one row");
-        return "you successfully deleted that vault";
+
+
+        Vault vault = _repo.GetVaultById(vaultId);
+        if (vault.CreatorId != userId) throw new Exception("you can not delete this vault");
+        _repo.RemoveVault(vaultId);
+        return "you successfully deleted the vault";
+
+        // int rows = _repo.RemoveVault(vaultId);
+        // // Vault vault = GetVaultById(vaultId);
+        // if (vault.CreatorId != userId) throw new Exception("you can not delete this vault");
+        // if (rows > 1) throw new Exception("make sure not to delet more than one row");
+        // return "you successfully deleted that vault";
     }
 
     internal Vault UpdateVault(Vault updateData)
     {
-        Vault original = GetVaultById(updateData.Id);
+        Vault original = GetVaultById(updateData.Id, updateData.CreatorId);
         if (original == null) throw new Exception("there is nothing in that id");
         original.Name = updateData.Name != null ? updateData.Name : original.Name;
         original.IsPrivate = updateData.IsPrivate != null ? updateData.IsPrivate : original.IsPrivate;

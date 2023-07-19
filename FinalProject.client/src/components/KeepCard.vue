@@ -10,7 +10,7 @@
             <p>{{ keep.name }}</p>
         </div> -->
             <div>
-                <img class="keep col-md-4 col-12" @click="sectActiveKeep(keep.id)" :src="keep.img" alt="">
+                <img class="keep col-md-4 col-12" @click="sectActiveKeep(keep.id)" :src="keep?.img" alt="">
             </div>
             <p><i class="mdi mdi-delete text-danger btn" @click="deleteKeep(keep.id)"></i></p>
             <!-- {{ keep }} -->

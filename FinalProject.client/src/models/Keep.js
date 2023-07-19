@@ -12,3 +12,10 @@ export class Keep {
         this.creator = new Account(data.creator)
     }
 }
+
+export class KeepInVault extends Keep {
+    constructor(data) {
+        super(data)
+        this.vaultKeepId = data.vaultKeepId
+    }
+}

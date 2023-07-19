@@ -1,10 +1,10 @@
 <template>
-    <section class="container-fluid">
+    <section class="container-fluid" v-if="vaultKeep">
         <div class="row">
+            <p>here comes some keeps that you do not see it buddy try and try again</p>
             <div class="col-4" v-for="p in vaultKeep" :key="p.id">
 
-                <KeepCard :vaultkeep="p" />
-                <p>here comes some keeps that you can not do it buddy try and try again</p>
+                <KeepCard :keep="p" />
             </div>
         </div>
 
@@ -19,8 +19,13 @@ import { vaultKeepService } from '../services/VaultKeepService.js'
 import Pop from '../utils/Pop.js';
 import { computed, watchEffect } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
+import { Keep } from '../models/Keep.js';
+import { VaultKeep } from '../models/VaultKeep.js';
 
 export default {
+    props: {
+        vaultKeep: { type: VaultKeep, required: true }
+    },
     setup() {
         const route = useRoute()
         const router = useRouter()
@@ -34,6 +39,9 @@ export default {
         // }
         async function getKeepsByVaultId() {
             try {
+                // if (vaults.isPrivat) {
+                //     router.push('/')
+                // }
                 await vaultKeepService.getKeepsByVaultId(route.params.vaultId)
             } catch (error) {
                 Pop.error(error)
@@ -63,7 +71,9 @@ export default {
 
 
 
-            vaultKeep: computed(() => AppState.vaultKeep)
+            vaultKeep: computed(() => AppState.vaultKeep),
+            keep: computed(() => AppState.keeps),
+            vaults: computed(() => AppState.vaults)
         };
     },
 

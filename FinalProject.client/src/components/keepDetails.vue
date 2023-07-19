@@ -26,6 +26,9 @@
                             <p><i class="mdi mdi-eye ">:<span id="views">
                                         {{ activeKeep.views }}
                                     </span></i></p>
+                            <p><i class="mdi mdi-alpha-k-box ">:<span id="kept">
+                                        {{ activeKeep.kept }}
+                                    </span></i></p>
                             {{ activeKeep.description }}
                             <!-- {{ active.category }} -->
 
@@ -39,18 +42,23 @@
                     </div>
                 </div>
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label for="Vault"> Select Vault</label>
                 <select name="Vault" class="form-control" v-model="editable.vaultId">
 
                     <option value="">Save to your Vault</option>
                     <option v-for="v in myVault" :key="v.id" :value="v.id"> {{ v.name }}</option>
                 </select>
-            </div>
+            </div> -->
+            Choose the vault to save the keep
             <div class="modal-footer">
-                <div v-for="vt in myVault">
-                    <button class="btn btn-primary" @click="addKeepInVault(vt.id)">save</button>
-                </div>
+
+                <!-- <div v-for="vt in myVault">
+                    <li class="btn btn-primary" @click="addKeepInVault(vt.id)">save</li>
+                </div> -->
+
+                <button v-for="vt in myVault" class="btn btn-primary" @click="addKeepInVault(vt.id)">{{ vt.name
+                }}</button>
                 <button type="button" class="btn btn-primary" data-bs-dismiss="modal">close</button>
 
 
@@ -94,6 +102,7 @@ export default {
                         vaultId,
                         keepId: AppState.activeKeep.id
                     };
+                    debugger
                     await vaultKeepService.addKeepInVault(vkData)
                     Pop.toast('you successfully added that keep in your vault')
 
@@ -115,7 +124,8 @@ export default {
             activeKeep: computed(() => AppState.activeKeep),
             // myVaults: computed(() => AppState.myVault)
             vaults: computed(() => AppState.vaults),
-            myVault: computed(() => AppState.myVault)
+            myVault: computed(() => AppState.myVault),
+            vaultKeep: computed(() => AppState.vaultKeep)
         }
     }
 }

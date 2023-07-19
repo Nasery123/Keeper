@@ -46,10 +46,12 @@ public class VaultKeepRepository
         SELECT k.*,
         vk.*,
         accounts.*
+
         FROM keep k
         JOIN vaultkeep vk ON vk.keepId = k.id
         JOIN accounts ON k.creatorId = accounts.id
         WHERE vk.vaultId = @vaultId
+
 
         ;";
         List<KeepsInVault> keepInVault = _db.Query<KeepsInVault, VaultKeep, Account, KeepsInVault>(sql, (keepInVault, vaultKeep, acc) =>

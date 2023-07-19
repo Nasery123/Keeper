@@ -8,7 +8,7 @@ export class Vault {
         this.description = data.description
         this.img = data.img
         this.isPrivate = data.isPrivate
-        this.CreatorId = data.CreatorId
+        this.creatorId = data.creatorId
         // this.Creator = new Account(data.Creator)
     }
 }

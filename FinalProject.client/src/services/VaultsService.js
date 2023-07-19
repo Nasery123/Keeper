@@ -22,6 +22,12 @@ class VaultsService {
         logger.log('here are profiles vault', res.data)
         AppState.profileVault = res.data.map(v => new Vault(v))
     }
+    async deleteVault(vaultId) {
+
+        const res = await api.delete(`api/vaults/${vaultId}`)
+        logger.log('you deleted this vault', res.data)
+        // AppState.vaults = AppState.vaults.filter(v => v.id != vaultId)
+    }
 
 }
 export const vaultsService = new VaultsService()

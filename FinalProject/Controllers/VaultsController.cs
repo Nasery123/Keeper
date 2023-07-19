@@ -36,11 +36,12 @@ public class VaultsController : ControllerBase
 
     [HttpGet("{vaultId}")]
 
-    public ActionResult<Vault> GetVaultById(int vaultId)
+    public async Task<ActionResult<Vault>> GetVaultById(int vaultId)
     {
         try
         {
-            Vault vault = _vaultsService.GetVaultById(vaultId);
+            Account userInfo = await _auth.GetUserInfoAsync<Account>(HttpContext);
+            Vault vault = _vaultsService.GetVaultById(vaultId, userInfo?.Id);
             return Ok(vault);
         }
         catch (Exception e)
@@ -67,11 +68,12 @@ public class VaultsController : ControllerBase
 
     [HttpDelete("{vaultId}")]
     [Authorize]
-    public ActionResult<string> RemoveVault(int vaultId)
+    public async Task<ActionResult<string>> RemoveVault(int vaultId)
     {
         try
         {
-            string message = _vaultsService.RemoveVault(vaultId);
+            Account userInfo = await _auth.GetUserInfoAsync<Account>(HttpContext);
+            string message = _vaultsService.RemoveVault(vaultId, userInfo.Id);
             return Ok(message);
         }
         catch (Exception e)

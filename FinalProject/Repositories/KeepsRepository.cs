@@ -52,10 +52,13 @@ public class KeepsRepository
     {
         string sql = @"
         SELECT keep.*,
+        COUNT(vk.id) As kept,
         accounts.*
         FROM keep
+        LEFT JOIN vaultkeep vk ON vk.keepId = keep.id
         JOIN accounts ON keep.creatorId = accounts.id
         WHERE keep.id = @keepId
+        GROUP BY keep.id;
 
 
         ;";
