@@ -30,9 +30,9 @@
                             <!-- {{ active.category }} -->
 
                             <b>{{ activeKeep.creator?.name }}</b>
-                            <!-- <routerlink :to="{ name: 'Profile', params: { profileId: activeKeep?.CreatorId } }"> -->
-                            <img class="elevation-4 profile" :src="activeKeep.creator?.picture" alt="">
-                            <!-- </routerlink> -->
+                            <router-link :to="{ name: 'Profile', params: { profileId: activeKeep?.creatorId } }">
+                                <img class="elevation-4 profile" :src="activeKeep.creator?.picture" alt="">
+                            </router-link>
                         </div>
 
 
@@ -48,7 +48,9 @@
                 </select>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-primary" @click="addKeepInVault()">SAVE</button>
+                <div v-for="vt in myVault">
+                    <button class="btn btn-primary" @click="addKeepInVault(vt.id)">save</button>
+                </div>
                 <button type="button" class="btn btn-primary" data-bs-dismiss="modal">close</button>
 
 
@@ -88,6 +90,15 @@ export default {
                     // logger.log('[HERE IS YOUR KEEP ID]', keepId)
                     // logger.log('[here is your vaultId]', vaultId)
                     // Pop.toast("you added that keep in your vault");
+                    const vkData = {
+                        vaultId,
+                        keepId: AppState.activeKeep.id
+                    };
+                    await vaultKeepService.addKeepInVault(vkData)
+                    Pop.toast('you successfully added that keep in your vault')
+
+
+
                 }
                 catch (error) {
                     // Pop.error('something went wrong while adding this keep in your vault')

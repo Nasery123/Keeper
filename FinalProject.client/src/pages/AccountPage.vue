@@ -37,7 +37,7 @@
       <p>{{ account.email }}</p>
     </div>
   </div>
-
+  <p>Available Vaults: {{ myVault.length }}</p>
   <!-- import VaultCard from '../components/VaultCard.vue.js'; -->
 
   <section class="container-fluid" v-if="myVault">

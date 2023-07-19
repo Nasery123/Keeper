@@ -2,9 +2,10 @@
     <!-- <div class="container-fluid"> -->
     <!-- <div class="row"> -->
     <div class="col-md-3 col-12 img-fluid">
-        <router-link :to="{ name: 'KeepInVault', params: { vaultId: myVault.id } }">
-            <img class="m-2 rounded elevation-4" :src="myVault.img" alt="">
-        </router-link>
+        <!-- <router-link :to="{ name: 'KeepInVault', params: { vaultId: myVault.id } }"> -->
+        <img @click="$router.push({ name: 'KeepInVault', params: { vaultId: myVault.id } })" class="m-2 rounded elevation-4"
+            :src="myVault.img" alt="">
+        <!-- </router-link> -->
     </div>
 
 

@@ -33,5 +33,10 @@ class KeepsService {
         logger.log(`you deleted the keep at id ${keepId}`)
         // AppState.keeps = AppState.keeps.filter(k k.id != keepId)
     }
+    async getProfileKeep(id) {
+        const res = await api.get(`api/profiles/${id}/keeps`)
+        logger.log("here are some keeps for this profile", res.data)
+        AppState.profileKeep = res.data.map(k => new Keep(k))
+    }
 }
 export const keepsService = new KeepsService();
