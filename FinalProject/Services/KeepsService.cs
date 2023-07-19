@@ -3,13 +3,15 @@ namespace FinalProject.Services;
 public class KeepsService
 {
     private readonly KeepsRepository _repo;
+    private readonly ProfileService _profilesService;
 
-    public KeepsService(KeepsRepository repo)
+    public KeepsService(KeepsRepository repo, ProfileService profilesService)
     {
         _repo = repo;
+        _profilesService = profilesService;
     }
 
-    internal object CreateKeep(Keep keepData)
+    internal Keep CreateKeep(Keep keepData)
     {
         Keep keep = _repo.CreateKeep(keepData);
         return keep;
@@ -31,6 +33,7 @@ public class KeepsService
 
     internal List<Keep> GetUsersKeep(string profileId)
     {
+        _profilesService.GetProfileById(profileId);
         List<Keep> usersKeep = _repo.GetUsersKeep(profileId);
         return usersKeep;
     }

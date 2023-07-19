@@ -29,6 +29,7 @@ public class VaultsService
     internal List<Vault> GetUsersVault(string profileId)
     {
         List<Vault> vault = _repo.GetUsersVault(profileId);
+        // TODO filter out vaults that are private and you are not the owner off
         return vault;
     }
 
@@ -36,7 +37,7 @@ public class VaultsService
 
     internal Vault GetVaultById(int vaultId, string userId)
     {
-
+        // TODO check if vault is private, and you are not the owner
         Vault vault = _repo.GetVaultById(vaultId);
         if (vault == null)
         {

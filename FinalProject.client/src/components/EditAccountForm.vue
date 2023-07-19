@@ -31,6 +31,11 @@
                 </div>
                 <div class="form-floating mb-3">
                     <input name="picture" class="form-control" placeholder="Profile Picture" type="url" required
+                        v-model="editable.coverImg">
+                    <label for="picture">Cover Img</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input name="picture" class="form-control" placeholder="Profile Picture" type="url" required
                         v-model="editable.picture">
                     <label for="picture">Picture:</label>
                 </div>

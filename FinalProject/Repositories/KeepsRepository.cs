@@ -23,7 +23,10 @@ public class KeepsRepository
 
         ;";
 
-        return _db.Query<Keep>(sql, keepData).FirstOrDefault();
+
+        Keep keep = _db.Query<Keep>(sql, keepData).FirstOrDefault();
+
+        return keep;
 
 
     }
@@ -74,9 +77,12 @@ public class KeepsRepository
     internal List<Keep> GetUsersKeep(string profileId)
     {
         string sql = @"
-        SELECT *
+        SELECT
+        keep.*,
+        accounts.*
         FROM keep
         JOIN accounts ON keep.CreatorId = @profileId
+        WHERE accounts.id= @profileId
 
 
         ;";

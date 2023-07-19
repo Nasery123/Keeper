@@ -66,22 +66,22 @@ public class VaultKeepRepository
 
     internal VaultKeep GetVaultKeepById(int vaultkeepId)
     {
-        string sql = @"
-        SELECT
-        vaultkeep.*,
-        accounts.*
-        FROM vaultkeep
-        JOIN accounts ON vaultkeep.creatorId = accounts.id
-        WHERE vaultkeep.id = @vaultkeepId
-        ;";
+        // string sql = @"
+        // SELECT
+        // vaultkeep.*,
+        // accounts.*
+        // FROM vaultkeep
+        // JOIN accounts ON vaultkeep.creatorId = accounts.id
+        // WHERE vaultkeep.id = @vaultkeepId
+        // ;";
 
-        VaultKeep vaultKeep = _db.Query<VaultKeep, Account, VaultKeep>(sql, (vaultKeep, creator) =>
-        {
-            // vaultKeep.Creator = creator;
-            return vaultKeep;
-        }, new { vaultkeepId }).FirstOrDefault();
-        return vaultKeep;
+        // VaultKeep vaultKeep = _db.Query<VaultKeep, Account, VaultKeep>(sql, (vaultKeep, creator) =>
+        // {
+        //     vaultKeep.Creator = creator;
+        //     return vaultKeep;
+        // }, new { vaultkeepId }).FirstOrDefault();
+        // return vaultKeep;
 
-
+        throw new NotImplementedException("Unimplemented");
     }
 }

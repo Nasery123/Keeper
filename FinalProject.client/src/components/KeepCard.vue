@@ -29,6 +29,7 @@ import Pop from '../utils/Pop.js';
 import { Modal } from 'bootstrap';
 import { keepsService } from '../services/KeepsService.js';
 import { logger } from '../utils/Logger.js';
+import { Account } from '../models/Account.js';
 
 export default {
     props: {
@@ -49,6 +50,9 @@ export default {
                 try {
                     const yes = await Pop.confirm("do you want to delete this keep")
                     if (!yes) {
+                        return
+                    }
+                    if (keep.creatorId != userInfo.id) {
                         return
                     }
                     await keepsService.deleteKeep(keepId)

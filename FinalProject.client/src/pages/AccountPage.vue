@@ -33,6 +33,7 @@
   <div class="container-fluid">
     <div class="about text-center">
       <h1>Welcome {{ account?.name }}</h1>
+      <img :src="account?.coverImg" alt="">
       <img class="rounded" :src="account?.picture" alt="" />
       <p>{{ account.email }}</p>
     </div>
@@ -81,7 +82,7 @@ export default {
 </script>
 
 <style scoped>
-img {
+.rounded {
   max-width: 100px;
 }
 </style>
