@@ -12,7 +12,11 @@
             <div>
                 <img class="keep col-md-4 col-12" @click="sectActiveKeep(keep.id)" :src="keep?.img" alt="">
             </div>
-            <p><i class="mdi mdi-delete text-danger btn" @click="deleteKeep(keep.id)"></i></p>
+
+
+            <div v-if="account.id == keep.creatorId && !isVaultRoute">
+                <p><i class="mdi mdi-delete text-danger btn" @click="deleteKeep(keep.id)"></i></p>
+            </div>
             <!-- {{ keep }} -->
             <!-- </div>
         </div> -->
@@ -52,15 +56,17 @@ export default {
                     if (!yes) {
                         return
                     }
-                    if (keep.creatorId != userInfo.id) {
-                        return
-                    }
+                    // if (props.keep.creatorId != account.userInfo.id) {
+                    //     return
+                    // }
                     await keepsService.deleteKeep(keepId)
                 } catch (error) {
                     Pop.error(error)
                     logger.log(error)
                 }
-            }
+            },
+            account: computed(() => AppState.account),
+            user: computed(() => AppState.user)
 
         }
     }

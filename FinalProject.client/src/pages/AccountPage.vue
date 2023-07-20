@@ -5,6 +5,7 @@
       <button data-bs-toggle="modal" data-bs-target="#editAccount">Edit Account</button>
     </div>
     <!-- <form @submit.prevent="handleChanges()">
+import KeepCard from '../components/KeepCard.vue.js';
 
       <div class="modal-body">
         <div class="form-floating mb-3">
@@ -33,7 +34,7 @@
   <div class="container-fluid">
     <div class="about text-center">
       <h1>Welcome {{ account?.name }}</h1>
-      <img :src="account?.coverImg" alt="">
+      <img class="img-fluid" :src="account?.coverImg" alt="">
       <img class="rounded" :src="account?.picture" alt="" />
       <p>{{ account.email }}</p>
     </div>
@@ -47,6 +48,11 @@
 
     </div>
 
+  </section> Available Keeps: {{ keep.length }}
+  <section class="container-fluid" v-if="keeps">
+    <div class="row" v-for="k in keeps" :key="k.id">
+      <KeepCard :keep="k" />
+    </div>
   </section>
 </template>
 
@@ -69,15 +75,14 @@ export default {
     // onMounted(() => {
     //   getVault()
     // })
-
-
     return {
       account: computed(() => AppState.account),
       // vaults: computed(() => AppState.vaults),
-      myVault: computed(() => AppState.myVault)
+      myVault: computed(() => AppState.myVault),
+      keep: computed(() => AppState.keeps)
     };
   },
-  // components: { VaultCard }
+
 }
 </script>
 

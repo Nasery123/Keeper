@@ -52,10 +52,12 @@ public class VaultsController : ControllerBase
 
     [HttpPut("{vaultId}")]
     [Authorize]
-    public ActionResult<Vault> UpdateVault(int vaultId, [FromBody] Vault updateData)
+    public async Task<ActionResult<Vault>> UpdateVault(int vaultId, [FromBody] Vault updateData)
     {
         try
         {
+            Account userInfo = await _auth.GetUserInfoAsync<Account>(HttpContext);
+            updateData.CreatorId = userInfo.Id;
             updateData.Id = vaultId;
             Vault vault = _vaultsService.UpdateVault(updateData);
             return Ok(vault);

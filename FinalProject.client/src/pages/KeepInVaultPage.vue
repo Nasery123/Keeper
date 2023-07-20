@@ -3,8 +3,10 @@
         <div class="row">
             <p>here comes some keeps that you do not see it buddy try and try again</p>
             <div class="col-4" v-for="p in vaultKeep" :key="p.id">
+                <img :src="p.img" alt="p.name">
 
-                <KeepCard :keep="p" />
+
+                <!-- <KeepCard :keep="p" /> -->
             </div>
         </div>
 

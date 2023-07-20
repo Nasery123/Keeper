@@ -27,7 +27,7 @@ public class VaultKeepRepository
         return vkData;
     }
 
-    internal int DeleteVaultKeep(int vaultkeepId)
+    internal void DeleteVaultKeep(int vaultkeepId)
     {
         string sql = @"
        DELETE FROM vaultkeep WHERE id = @vaultkeepId
@@ -36,8 +36,8 @@ public class VaultKeepRepository
 
 
        ;";
-        int rows = _db.Execute(sql, new { vaultkeepId });
-        return rows;
+        _db.Execute(sql, new { vaultkeepId });
+
     }
 
     internal List<KeepsInVault> GetKeepsByVaultId(int vaultId)
@@ -66,22 +66,22 @@ public class VaultKeepRepository
 
     internal VaultKeep GetVaultKeepById(int vaultkeepId)
     {
-        // string sql = @"
-        // SELECT
-        // vaultkeep.*,
-        // accounts.*
-        // FROM vaultkeep
-        // JOIN accounts ON vaultkeep.creatorId = accounts.id
-        // WHERE vaultkeep.id = @vaultkeepId
-        // ;";
+        string sql = @"
+        SELECT
+        vaultkeep.*,
+        accounts.*
+        FROM vaultkeep
+        JOIN accounts ON vaultkeep.creatorId = accounts.id
+        WHERE vaultkeep.id = @vaultkeepId
+        ;";
 
-        // VaultKeep vaultKeep = _db.Query<VaultKeep, Account, VaultKeep>(sql, (vaultKeep, creator) =>
-        // {
-        //     vaultKeep.Creator = creator;
-        //     return vaultKeep;
-        // }, new { vaultkeepId }).FirstOrDefault();
-        // return vaultKeep;
+        VaultKeep vaultKeep = _db.Query<VaultKeep, Account, VaultKeep>(sql, (vaultKeep, creator) =>
+        {
+            // vaultKeep.Creator = creator;
+            return vaultKeep;
+        }, new { vaultkeepId }).FirstOrDefault();
+        return vaultKeep;
 
-        throw new NotImplementedException("Unimplemented");
+        // throw new NotImplementedException("Unimplemented");
     }
 }

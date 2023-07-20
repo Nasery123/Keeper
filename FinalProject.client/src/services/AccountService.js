@@ -13,7 +13,7 @@ class AccountService {
     }
   }
   async editAccount(formData) {
-    const res = await api.put('/account', { ...formData, name: formData.name, picture: formData.picture })
+    const res = await api.put('/account', { ...formData, name: formData.name, picture: formData.picture, coverImg: formData.coverImg })
     AppState.account = new Account(res.data)
   }
 }

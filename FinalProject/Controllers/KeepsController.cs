@@ -54,11 +54,12 @@ public class KeepsController : ControllerBase
 
     [HttpGet("{keepId}")]
 
-    public ActionResult<Keep> GetKeepById(int keepId)
+    public async Task<ActionResult<Keep>> GetKeepById(int keepId)
     {
         try
         {
-            Keep keep = _keepsService.GetKeepById(keepId);
+            Account userInfo = await _auth.GetUserInfoAsync<Account>(HttpContext);
+            Keep keep = _keepsService.GetKeepById(keepId, userInfo?.Id);
             return Ok(keep);
         }
         catch (Exception e)
@@ -76,8 +77,8 @@ public class KeepsController : ControllerBase
         try
         {
             Account userInfo = await _auth.GetUserInfoAsync<Account>(HttpContext);
-            updateData.Id = keepId;
-            Keep keep = _keepsService.UpdateKeep(updateData);
+            // updateData.Id = keepId;
+            Keep keep = _keepsService.UpdateKeep(keepId, updateData, userInfo.Id);
             return Ok(keep);
 
 
@@ -89,8 +90,6 @@ public class KeepsController : ControllerBase
         }
     }
 
-
-
     [HttpDelete("{keepId}")]
     [Authorize]
 
@@ -99,7 +98,7 @@ public class KeepsController : ControllerBase
         try
         {
             Account userInfo = await _auth.GetUserInfoAsync<Account>(HttpContext);
-            string message = _keepsService.RemoveKeep(keepId);
+            string message = _keepsService.RemoveKeep(keepId, userInfo.Id);
             return Ok(message);
         }
 
@@ -109,4 +108,5 @@ public class KeepsController : ControllerBase
         }
 
     }
+
 }

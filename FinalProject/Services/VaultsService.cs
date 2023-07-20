@@ -68,8 +68,8 @@ public class VaultsService
 
     internal Vault UpdateVault(Vault updateData)
     {
-        Vault original = GetVaultById(updateData.Id, updateData.CreatorId);
-        if (original == null) throw new Exception("there is nothing in that id");
+        Vault original = this.GetVaultById(updateData.Id, updateData.CreatorId);
+        if (original.CreatorId != updateData.CreatorId) throw new Exception("there is nothing in that id");
         original.Name = updateData.Name != null ? updateData.Name : original.Name;
         original.IsPrivate = updateData.IsPrivate != null ? updateData.IsPrivate : original.IsPrivate;
 

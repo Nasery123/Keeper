@@ -17,16 +17,18 @@ public class KeepsService
         return keep;
     }
 
+
     internal List<Keep> GetAllKeep()
     {
         List<Keep> keep = _repo.GetAllKeep();
         return keep;
     }
 
-    internal Keep GetKeepById(int keepId)
+    internal Keep GetKeepById(int keepId, string userId)
     {
         Keep keep = _repo.GetKeepById(keepId);
-        keep.views++;
+        if (keep.CreatorId != userId)
+            keep.views++;
         _repo.UpdateView(keep);
         return keep;
     }
@@ -38,19 +40,23 @@ public class KeepsService
         return usersKeep;
     }
 
-    internal string RemoveKeep(int keepId)
+    internal string RemoveKeep(int keepId, string userId)
     {
-        GetKeepById(keepId);
+        Keep keep = this.GetKeepById(keepId, userId);
+        if (keep.CreatorId != userId) throw new Exception("you can not delete this keep");
 
         int rows = _repo.RemoveKeep(keepId);
         if (rows > 1) throw new Exception("please make sure you do not remove more than one");
         return "you sucessfully removed a row in your keep table";
     }
 
-    internal Keep UpdateKeep(Keep updateData)
+    internal Keep UpdateKeep(int keepId, Keep updateData, string userId)
     {
 
-        Keep original = GetKeepById(updateData.Id);
+        Keep original = _repo.GetKeepById(keepId);
+        if (original.CreatorId != userId) throw new Exception("you can not edit this keep");
+
+
         original.Name = updateData.Name != null ? updateData.Name : original.Name;
         original.Description = updateData.Description != null ? updateData.Description : original.Description;
 

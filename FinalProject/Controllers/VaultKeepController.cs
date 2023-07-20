@@ -6,12 +6,14 @@ public class VaultKeepController : ControllerBase
 {
     private readonly VaultKeepService _vkService;
     private readonly Auth0Provider _auth;
+    private readonly VaultsService _vaultsService;
 
 
-    public VaultKeepController(VaultKeepService vkService, Auth0Provider auth)
+    public VaultKeepController(VaultKeepService vkService, Auth0Provider auth, VaultsService vaultsService)
     {
         _vkService = vkService;
         _auth = auth;
+        _vaultsService = vaultsService;
     }
 
 
@@ -22,7 +24,9 @@ public class VaultKeepController : ControllerBase
         try
         {
             Account userInfo = await _auth.GetUserInfoAsync<Account>(HttpContext);
-            vkData.creatorId = userInfo.Id;
+            // string userId = userInfo.Id;
+            vkData.CreatorId = userInfo.Id;
+            // Vault vault = _vaultsService.GetVaultById(vkData.VaultId, userId);
             VaultKeep newVaultKeep = _vkService.CreateVault(vkData);
             return Ok(newVaultKeep);
         }
@@ -57,7 +61,8 @@ public class VaultKeepController : ControllerBase
         try
         {
             Account userInfo = await _auth.GetUserInfoAsync<Account>(HttpContext);
-            string message = _vkService.DeleteVaultKeep(vaultkeepId, userInfo.Id);
+            string userId = userInfo.Id;
+            string message = _vkService.DeleteVaultKeep(vaultkeepId, userId);
             return Ok(message);
         }
         catch (Exception e)
