@@ -56,6 +56,7 @@ import { ref, watchEffect } from 'vue';
 import { AppState } from '../AppState.js';
 import Pop from '../utils/Pop.js';
 import { accountService } from '../services/AccountService.js';
+import { Modal } from 'bootstrap';
 
 export default {
     setup() {
@@ -68,6 +69,7 @@ export default {
             async handleChanges() {
                 try {
                     await accountService.editAccount(editable.value)
+                    Modal.getOrCreateInstance("#editAccount").hide()
                 } catch (error) {
                     Pop.error(error)
                 }

@@ -40,18 +40,24 @@ import KeepCard from '../components/KeepCard.vue.js';
     </div>
   </div>
   <p>Available Vaults: {{ myVault.length }}</p>
-  <!-- import VaultCard from '../components/VaultCard.vue.js'; -->
+
 
   <section class="container-fluid" v-if="myVault">
-    <div class="row" v-for="v in myVault" :key="v.id">
-      <VaultCard :myVault="v" />
+    <div class="row">
+      <div class="col-4" v-for="v in myVault" :key="v.id">
+        <VaultCard :myVault="v" />
+
+      </div>
 
     </div>
 
-  </section> Available Keeps: {{ keep.length }}
-  <section class="container-fluid" v-if="keeps">
-    <div class="row" v-for="k in keeps" :key="k.id">
-      <KeepCard :keep="k" />
+  </section> Available Keeps: {{ profileKeep.length }}
+  <section class="container-fluid" v-if="profileKeep">
+    <div class="row">
+      <div class="col-3" v-for="k in profileKeep" :key="k.id">
+        <KeepCard :keep="k" />
+      </div>
+
     </div>
   </section>
 </template>
@@ -79,7 +85,8 @@ export default {
       account: computed(() => AppState.account),
       // vaults: computed(() => AppState.vaults),
       myVault: computed(() => AppState.myVault),
-      keep: computed(() => AppState.keeps)
+      profileKeep: computed(() => AppState.profileKeep),
+      // keep: computed(() => AppState.keeps)
     };
   },
 

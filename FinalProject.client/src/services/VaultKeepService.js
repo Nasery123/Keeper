@@ -17,6 +17,10 @@ class VaultKeepService {
         logger.log('here are some keeps for that vault', res.data)
         AppState.vaultKeep = res.data.map(vk => new KeepInVault(vk))
     }
+    async deleteVaultkeep(vaultkeepId) {
+        const res = await api.delete(`api/vaultkeeps/${vaultkeepId}`);
+        AppState.vaultKeep = AppState.vaultKeep.filter(v => v.vaultkeepId != vaultkeepId)
+    }
 
 }
 export const vaultKeepService = new VaultKeepService()

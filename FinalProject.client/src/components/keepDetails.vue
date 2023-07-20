@@ -21,7 +21,7 @@
                     </div>
                     <div class="row">
                         <!-- <p class="text-light">here is your active keep</p> -->
-                        <div class="col-3">
+                        <div class="col-12">
                             <p><b>{{ activeKeep.name }}</b></p>
                             <p><i class="mdi mdi-eye ">:<span id="views">
                                         {{ activeKeep.views }}

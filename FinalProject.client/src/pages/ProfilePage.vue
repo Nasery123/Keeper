@@ -16,7 +16,7 @@
     <p class=""><b>{{ profileVault.length }}</b></p>
     <div class="container-fluid">
         <div class="row">
-            <div v-for="v in profileVault" v-if="profileVault.isPrivat != false">
+            <div class="col-4 vaultCard" v-for="v in profileVault" v-if="profileVault.isPrivate != false">
                 <VaultCard :myVault="v" />
             </div>
         </div>
@@ -27,7 +27,7 @@
     <p><b>{{ profileKeep.length }}</b></p>
     <div class="container-fluid">
         <div class="row">
-            <div v-for="k in profileKeep">
+            <div class="col-3" v-for="k in profileKeep">
                 <KeepCard :keep="k" />
             </div>
         </div>
@@ -72,6 +72,7 @@ export default {
                 // if (profileVault.isPrivat) {
                 //     router.push({ name: "Home" })
                 // }
+
                 await vaultsService.getProfileVault(route.params.profileId);
             }
             catch (error) {

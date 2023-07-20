@@ -8,21 +8,7 @@
 
         <form @submit.prevent="createKeep()">
             <div class="modal-body">
-                <!-- <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="floatingInput" placeholder="Category"
-                        v-model="editable.Category">
-                    <label for="floatingInput">Recipe Category</label>
-                </div> -->
-                <!-- select category
-                <select type="name" class="form-floating" v-model="editable.Category">
 
-                    <option value="mexican">Mexican</option>
-                    <option value="burger">Burger</option>
-                    <option value="soup">Soup</option>
-                    <option value="specialCoffee">Special Coffee</option>
-                    <option value="cheese">Cheese</option>
-                    <option value="italian">Italian</option>
-                </select> -->
                 <div class="form-floating">
                     <input type="text" class="form-control" id="floatingPassword" placeholder="name"
                         v-model="editable.name">
@@ -38,15 +24,11 @@
                         v-model="editable.description">
                     <label for="floatingPassword">descrioption</label>
                 </div>
-                <div class="form-floating">
-                    <input type="text" class="form-control" id="floatingPassword" placeholder="location"
-                        v-model="editable.title">
-                    <label for="floatingPassword">title</label>
-                </div>
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Create Recipe</button>
+                <button type="submit" class="btn btn-primary">Create</button>
             </div>
         </form>
     </div>
@@ -57,6 +39,7 @@
 import { ref } from 'vue';
 import { keepsService } from '../services/KeepsService.js';
 import Pop from '../utils/Pop.js';
+import { Modal } from 'bootstrap';
 
 export default {
     setup() {
@@ -67,6 +50,8 @@ export default {
                 try {
                     const formData = editable.value
                     const newKeep = await keepsService.createKeep(formData)
+                    Modal.getOrCreateInstance("#createKeep").hide()
+                    Pop.toast("your new keep successfully added to the collection")
                     return newKeep;
 
                 } catch (error) {

@@ -1,22 +1,22 @@
 <template>
-    <section class="container-fluid">
+    <section class="container-fluid" v-if="keep">
         <!--  v-if="keep" -->
-        <div class="row">
-            <!-- <div class="">
-            <div class=""> -->
-            <!-- <div class="" v-for="p in keep" :key="p.id"></div> -->
+        <div class="">
 
-            <!-- <div class="text-light" :style="{ backgroundImage: `url(${keep.img})` }">
-            <p>{{ keep.name }}</p>
-        </div> -->
             <div>
-                <img class="keep col-md-4 col-12" @click="sectActiveKeep(keep.id)" :src="keep?.img" alt="">
+                <img class="keep img-fluid rounded shadow selectable" @click="sectActiveKeep(keep.id)" :src="keep?.img"
+                    alt="">
             </div>
 
+            <!--  -->
 
-            <div v-if="account.id == keep.creatorId && !isVaultRoute">
-                <p><i class="mdi mdi-delete text-danger btn" @click="deleteKeep(keep.id)"></i></p>
+            <div>
+                <p v-if="account.id == keep.creatorId && !keep.vaultKeepId"><i class="mdi mdi-delete text-danger btn"
+                        @click="deleteKeep(keep.id)"></i></p>
             </div>
+            <!-- TODO separate button for removing vaultkeep -->
+            <p v-if="keep.vaultKeepId"><i class="mdi mdi-delete" @click="deleteVaultkeep(keep.vaultKeepId)"></i></p>
+
             <!-- {{ keep }} -->
             <!-- </div>
         </div> -->
@@ -34,6 +34,7 @@ import { Modal } from 'bootstrap';
 import { keepsService } from '../services/KeepsService.js';
 import { logger } from '../utils/Logger.js';
 import { Account } from '../models/Account.js';
+import { vaultKeepService } from '../services/VaultKeepService.js';
 
 export default {
     props: {
@@ -65,8 +66,21 @@ export default {
                     logger.log(error)
                 }
             },
+            async deleteVaultkeep(vaultkeepId) {
+                try {
+
+                    const yes = await Pop.confirm("do you want to delet the vaultkeep")
+                    if (!yes) {
+                        return
+                    }
+                    await vaultKeepService.deleteVaultkeep(vaultkeepId)
+                } catch (error) {
+                    Pop.error(error)
+                }
+            },
             account: computed(() => AppState.account),
             user: computed(() => AppState.user)
+            // vaultkeep: computed(() => AppState.vaultKeep)
 
         }
     }
@@ -75,4 +89,8 @@ export default {
 
 
 <style lang="scss" scoped>
+.delete {
+    height: 200px;
+    width: 230px;
+}
 </style>

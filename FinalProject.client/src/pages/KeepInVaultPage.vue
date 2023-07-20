@@ -2,11 +2,12 @@
     <section class="container-fluid" v-if="vaultKeep">
         <div class="row">
             <p>here comes some keeps that you do not see it buddy try and try again</p>
+
             <div class="col-4" v-for="p in vaultKeep" :key="p.id">
-                <img :src="p.img" alt="p.name">
+                <!-- <img :src="p.img" alt="p.name"> -->
 
 
-                <!-- <KeepCard :keep="p" /> -->
+                <KeepCard :keep="p" />
             </div>
         </div>
 
@@ -23,11 +24,10 @@ import { computed, watchEffect } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { Keep } from '../models/Keep.js';
 import { VaultKeep } from '../models/VaultKeep.js';
+import { vaultsService } from '../services/VaultsService.js';
 
 export default {
-    props: {
-        vaultKeep: { type: VaultKeep, required: true }
-    },
+
     setup() {
         const route = useRoute()
         const router = useRouter()
@@ -41,12 +41,13 @@ export default {
         // }
         async function getKeepsByVaultId() {
             try {
-                // if (vaults.isPrivat) {
-                //     router.push('/')
-                // }
+
+
                 await vaultKeepService.getKeepsByVaultId(route.params.vaultId)
             } catch (error) {
+                router.push('/')
                 Pop.error(error)
+
 
             }
         }
@@ -55,9 +56,7 @@ export default {
                 // getVaultKeeps()
                 getKeepsByVaultId()
             }
-            // else {
-            //     router.push('/')
-            // }
+
         })
 
         return {

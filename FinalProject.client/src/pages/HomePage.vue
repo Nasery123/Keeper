@@ -10,7 +10,7 @@
     <div class="row">
 
 
-      <div class="my-2" v-for="k in keeps" :key="k.id">
+      <div class="my-2 col-3" v-for="k in keeps" :key="k.id">
         <KeepCard :keep="k" />
 
 
@@ -40,7 +40,9 @@ export default {
       getKeep();
     });
     return {
-      keeps: computed(() => AppState.keeps)
+      keeps: computed(() => AppState.keeps),
+      // user: computed(() => AppState.user)
+      // account: computed(() => AppState.account)
     };
   },
 
