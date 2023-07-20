@@ -62,6 +62,7 @@ public class VaultKeepService
     {
         VaultKeep vaultKeep = _vtrepo.GetVaultKeepById(vaultkeepId);
 
+        if (vaultKeep == null) throw new Exception("something went wrong");
         if (vaultKeep.CreatorId == userId)
         {
             // throw new Exception("you are not allowed to delete it");
@@ -75,13 +76,14 @@ public class VaultKeepService
 
     }
 
-    internal List<KeepsInVault> GetKeepsByVaultId(int vaultId, string userId)
+    internal List<KeepsInVault> GetKeepsByVaultId(int vaultId)
     {
         // TODO Check if vault is private and whether you are owner
         // TODO check if user is null...should throw an error if it is
-        Vault vault = _vaultsService.GetVaultById(vaultId, userId);
-        if (vault == null) throw new Exception("there is an error");
-        if (vault.CreatorId != userId) throw new Exception("something wrong with user");
+        // Vault vault = _vaultsService.GetVaultById(vaultId, userId);
+        // if (vault == null) throw new Exception("there is an error");
+        // if (vault.CreatorId != userId) throw new Exception("something wrong with user");
+        // if(vault.IsPrivate == true)
         List<KeepsInVault> keeps = _vtrepo.GetKeepsByVaultId(vaultId);
         return keeps;
     }

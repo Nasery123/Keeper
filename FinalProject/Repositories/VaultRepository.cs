@@ -57,15 +57,16 @@ public class VaultRepository
         string sql = @"
         SELECT *
         FROM vaults
-        JOIN accounts ON vaults.CreatorId = @profileId
+        WHERE vaults.CreatorId = @profileId
 
         ;";
-        List<Vault> usersVault = _db.Query<Vault, Account, Vault>(sql, (vault, account) =>
-        {
-            vault.Creator = account;
-            return vault;
-        }, new { profileId }).ToList();
+        List<Vault> usersVault = _db.Query<Vault>(sql, new { profileId }).ToList();
         return usersVault;
+        //  (vault, account) =>
+        // {
+        //     vault.Creator = account;
+        //     return vault;
+        // },
 
     }
 
