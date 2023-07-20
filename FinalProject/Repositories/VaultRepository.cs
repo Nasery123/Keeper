@@ -52,7 +52,7 @@ public class VaultRepository
     // {
     // }
 
-    internal List<Vault> GetUsersVault(string profileId)
+    internal List<Vault> GetUsersVault(string profileId, string userId)
     {
         string sql = @"
         SELECT *
@@ -79,8 +79,6 @@ public class VaultRepository
         FROM vaults
         JOIN accounts ON vaults.creatorId = accounts.id
         WHERE vaults.id = @vaultId
-
-
         ;";
         Vault vault = _db.Query<Vault, Account, Vault>(sql, (vault, creator) =>
         {
@@ -89,11 +87,8 @@ public class VaultRepository
 
         }, new { vaultId }).FirstOrDefault();
         return vault;
-
-
-
-
     }
+
 
     internal int RemoveVault(int vaultId)
     {

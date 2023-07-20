@@ -28,10 +28,11 @@ public class VaultsService
 
     internal List<Vault> GetUsersVault(string profileId, string userId)
     {
-        List<Vault> vault = _repo.GetUsersVault(profileId);
+
+        List<Vault> vault = _repo.GetUsersVault(profileId, userId);
         // TODO filter out vaults that are private and you are not the owner off
         List<Vault> filteredVault = vault.FindAll(v => v.IsPrivate == false || v.CreatorId == userId);
-        return vault;
+        return filteredVault;
     }
 
 
@@ -56,7 +57,7 @@ public class VaultsService
 
 
         Vault vault = _repo.GetVaultById(vaultId);
-        if (vault.CreatorId != userId && vault.IsPrivate == true) throw new Exception("you can not delete this vault");
+        if (vault.CreatorId != userId) throw new Exception("you can not delete this vault");
         _repo.RemoveVault(vaultId);
         return "you successfully deleted the vault";
 

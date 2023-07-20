@@ -47,12 +47,13 @@ public class ProfileController : ControllerBase
     }
 
     [HttpGet("{profileId}/vaults")]
-    public async Task<ActionResult<List<Vault>>> GetUsersVault(string profileId)
+    public async Task<ActionResult<List<Vault>>> GetUsersVault(string profileId, string userId)
     {
         try
         {
             Account userInfo = await _auth.GetUserInfoAsync<Account>(HttpContext);
-            List<Vault> usersVault = _vaultService.GetUsersVault(profileId, userInfo?.Id);
+            // string userId = userInfo.Id;
+            List<Vault> usersVault = _vaultService.GetUsersVault(profileId, userId);
 
             return Ok(usersVault);
         }
