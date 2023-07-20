@@ -42,7 +42,7 @@
             </div>
             <div class="form-check">
                 <!-- NOTE FIRST, MAKE SURE TO SET UP V-MODEL TO WATCH FOR EDITABLE.ISPRIVATE -->
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" v-model="editable.isPrivat">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" v-model="editable.isPrivate">
                 <label class="form-check-label" for="flexCheckDefault">
                     Is Private
                 </label>
@@ -71,9 +71,10 @@ export default {
                 try {
                     const formdata = editable.value
                     // NOTE SECOND, MAKE SURE TO VERIFY IF THERE IS A EDITABLE.ISPRIVATE ON THE EDITABLE, IF NOT SET IT TO FALSE.
-                    formdata.isPrivat = formdata.isPrivat ? formdata.isPrivat : false
+                    formdata.isPrivate = formdata.isPrivate ? formdata.isPrivate : false
                     const newVault = await vaultsService.createVault(formdata)
                     Modal.getOrCreateInstance("#createVault").hide()
+
                     return newVault;
                 } catch (error) {
                     Pop.error(error)
