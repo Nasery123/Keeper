@@ -34,27 +34,30 @@ import KeepCard from '../components/KeepCard.vue.js';
   <div class="container-fluid">
     <div class="about text-center">
       <h1>Welcome {{ account?.name }}</h1>
-      <img class="img-fluid" :src="account?.coverImg" alt="">
-      <img class="rounded" :src="account?.picture" alt="" />
+      <img class="img-fluid coverImg" :src="account?.coverImg" alt="">
+      <img class="profile" :src="account?.picture" alt="" />
       <p>{{ account.email }}</p>
     </div>
   </div>
-  <p>Available Vaults: {{ myVault.length }}</p>
+  <hr>
+  <p class="text-center"><b><i>Available Vaults: {{ myVault.length }}</i></b></p>
 
 
   <section class="container-fluid" v-if="myVault">
     <div class="row">
-      <div class="col-4" v-for="v in myVault" :key="v.id">
+      <div class="col-md-4 col-12" v-for="v in myVault" :key="v.id">
         <VaultCard :myVault="v" />
 
       </div>
 
     </div>
 
-  </section> Available Keeps: {{ profileKeep.length }}
+  </section>
+  <hr>
+  <p class="text-center"><b><i>Available Keeps: {{ profileKeep.length }}</i></b> </p>
   <section class="container-fluid" v-if="profileKeep">
     <div class="row">
-      <div class="col-3" v-for="k in profileKeep" :key="k.id">
+      <div class="col-6 col-md-3" v-for="k in profileKeep" :key="k.id">
         <KeepCard :keep="k" />
       </div>
 
@@ -96,5 +99,21 @@ export default {
 <style scoped>
 .rounded {
   max-width: 100px;
+  /* aspect-ratio: 1/1; */
+  border-radius: 50px;
+}
+
+.coverImg {
+  height: 300px;
+  width: 100%;
+
+}
+
+.profile {
+  height: 50px;
+  width: 89px;
+  border-radius: 50%;
+
+
 }
 </style>

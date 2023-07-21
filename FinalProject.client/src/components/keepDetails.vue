@@ -50,7 +50,7 @@
                     <option v-for="v in myVault" :key="v.id" :value="v.id"> {{ v.name }}</option>
                 </select>
             </div> -->
-            Choose the vault to save the keep
+            <p class="text-center mt-4"><b>Choose the vault to save the keep</b></p>
             <div class="modal-footer">
 
                 <!-- <div v-for="vt in myVault">
@@ -59,7 +59,7 @@
 
                 <button v-for="vt in myVault" class="btn btn-primary" @click="addKeepInVault(vt.id)">{{ vt.name
                 }}</button>
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">close</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">close</button>
 
 
                 <!-- </div> -->
