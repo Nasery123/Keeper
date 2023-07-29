@@ -40,5 +40,11 @@ class KeepsService {
         logger.log("here are some keeps for this profile", res.data)
         AppState.profileKeep = res.data.map(k => new Keep(k))
     }
+    async searchKeep(searchTerm) {
+        const res = await api.get(`api/keep?query=${searchTerm}`)
+        AppState.query = searchTerm
+        AppState.keeps = res.data.keeps.map(k => new Keep(k))
+
+    }
 }
 export const keepsService = new KeepsService();
